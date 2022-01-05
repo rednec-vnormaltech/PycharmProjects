@@ -1,22 +1,16 @@
-# Параметры передаются как ссылка
-
-def elephant_to_free(some_list):
-    elephant_found = 'elephant' in some_list
-    if elephant_found:
-        some_list.remove('elephant')
-        print('Слон на свободе!!!')
-    return elephant_found
+# Напишите рекурсивную функцию, которая будет принимать два целых числа, a и b, и возвращать,
+# сколько раз можно разделить a на 2, пока получающаяся половина будет больше b.
 
 
-zoo = ['lion', 'elephant', 'monkey', 'skunk', 'horse', 'elephant']
+def rtv(a, b):
+    count = 0
+    c = 0
+    while a> b:
+        c = a / 2
+        a= a-c
+        count += 1
 
-elephant_to_free(zoo)
-print(zoo)
 
-elephant_to_free(zoo)
-print(zoo)
+    print(count)
 
-elephant_to_free(zoo)
-print(zoo)
-
-print(zoo)
+rtv(5, 2)
