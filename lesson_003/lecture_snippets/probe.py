@@ -4,7 +4,7 @@ import random as r
 sd.resolution= (1200,800)
 
 def draw_branches(point, angle, length):
-    if length < 3:
+    if length < 2:
         return
     else:
 
