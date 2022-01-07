@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import simple_draw as sd
+import sys
 #sd.resolution = (1200, 800)
 
 # Добавить цвет в функции рисования геом. фигур. из упр lesson_004/01_shapes.py
@@ -8,9 +9,12 @@ menu_list = ['0 : red', '1 : orange', '2 : yellow', '3 : green', '4 : cyan', '5 
 color_list = [sd.COLOR_RED, sd.COLOR_ORANGE, sd.COLOR_YELLOW, sd.COLOR_GREEN, sd.COLOR_CYAN, sd.COLOR_BLUE, sd.COLOR_PURPLE]
 
 print(*menu_list, sep="\n")
-user_input_color = input("Введите номер цвета: ")
-color_count = int(user_input_color)
-print('Вы ввели', menu_list[color_count])
+try:
+    color_count = int(input("Введите номер цвета: "))
+    print('Вы ввели', menu_list[color_count])
+except:
+    print("\033[31m {}".format('\nВведены некорректные данные'))
+    sys.exit()
 
 
 def count_angle(start_point, zero_angle, side_length, count_sides, count_colores):
