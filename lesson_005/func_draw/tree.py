@@ -1,23 +1,12 @@
 # -*- coding: utf-8 -*-
-from random import choice, randint
+from random import choice
 import random as r
 import simple_draw as sd
 
 
-
-
-
 def random_color():
-    """
-        Выдать случайный цвет из набора предопределенных
-    """
-    colors = [
-
-        sd.COLOR_YELLOW,
-        sd.COLOR_GREEN,
-        sd.COLOR_DARK_YELLOW,
-        sd.COLOR_DARK_GREEN,
-    ]
+    """ Выдать случайный цвет из набора предопределенных """
+    colors = [sd.COLOR_YELLOW, sd.COLOR_GREEN, sd.COLOR_DARK_YELLOW, sd.COLOR_DARK_GREEN, ]
     return choice(colors)
 
 
