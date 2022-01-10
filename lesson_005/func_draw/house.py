@@ -40,7 +40,22 @@ def draw_house():
     house_line2_start = house_line1_finish  # левая стена начал
     house_line2_finish = sd.get_point(625, 000)
 
+    # крыша лево
+    house_line3_start = house_line0_finish  # потолок начало
+    house_line3_finish = sd.get_point(450, 450)
+
+    # крыша лево
+    house_line4_start = house_line3_finish
+    house_line4_finish = house_line1_finish  # потолок начало
+
+
+
     sd.line(house_line0_start, house_line2_finish, color=sd.COLOR_BLUE, width=3)  # рисование пола
     sd.line(house_line0_start, house_line0_finish, color=sd.COLOR_BLUE, width=3) # рисование левой стены
     sd.line(house_line1_start, house_line1_finish, color=sd.COLOR_BLUE, width=3)  # рисование потолка
     sd.line(house_line2_start, house_line2_finish, color=sd.COLOR_BLUE, width=3)  # рисование правой стены
+
+    sd.line(house_line3_start, house_line3_finish, color=sd.COLOR_BLUE, width=3)  # рисование крыша лево
+    sd.line(house_line4_start, house_line4_finish, color=sd.COLOR_BLUE, width=3)  # рисование крыша право
+
+
