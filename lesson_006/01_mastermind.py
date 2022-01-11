@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import python_snippets.mastermind_engine as m_e
+from termcolor import cprint, colored
 # Игра «Быки и коровы»
 # https://goo.gl/Go2mb9
 #
@@ -42,5 +44,19 @@
 # Движок игры реализует только саму функциональность игры.
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
+m_e.riddle_number()
+user_number = 1
+while True:
+    cprint('Число загадано', color='yellow')
+    user_color = 'blue' if user_number == 1 else 'green'
+    cprint('Ход игрока {}'.format(user_number), color=user_color)
+    pos = input(colored('Введите число', color=user_color))
+    m_e.check_number(pos)
 
-# TODO здесь ваш код...
+
+
+#cprint('Выйграл игрок номер {}'.format(user_number), color='red')
+
+
+
+m_e.check_number(500)
