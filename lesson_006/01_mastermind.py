@@ -2,6 +2,7 @@
 
 import python_snippets.mastermind_engine as m_e
 from termcolor import cprint, colored
+
 # Игра «Быки и коровы»
 # https://goo.gl/Go2mb9
 #
@@ -49,15 +50,14 @@ user_number = 1
 while True:
     cprint('Число загадано', color='yellow')
     user_color = 'blue' if user_number == 1 else 'green'
-    if  not m_e.endgames():
-        cprint('Ход игрока {}'.format(user_number), color=user_color)
-        pos = input(colored('Введите число', color=user_color))
-        m_e.check_number(pos, user_number)
+    cprint('Ход игрока {}'.format(user_number), color=user_color)
+    pos = input(colored('Введите число', color=user_color))
+    m_e.check_number(pos, user_number)
+
+    if m_e.check_number:
+        user_number = 2 if user_number == 1 else 1
+    if m_e.bulls == 3:
+        m_e.endgames(user_number)
+        break
 
 
-
-
-
-
-
-m_e.check_number(500)

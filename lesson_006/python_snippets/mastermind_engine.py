@@ -2,6 +2,8 @@ from random import randint
 from termcolor import cprint
 
 _secret_number = []
+bulls = 0
+cow = 0
 
 
 def riddle_number():
@@ -17,8 +19,8 @@ def check_number(number_players,user_number):
         возвращает словарь {'bulls': N, 'cows': N}
         НО СНАЧАЛА СДЕЛАЕМ ФУНКЦИЮ СПИСКОМ
     """
-    bulls = 0
-    cow = 0
+    global bulls
+    global cow
 
     dict_players = list(str(number_players))
     x = int(dict_players[0])
@@ -56,8 +58,7 @@ def check_number(number_players,user_number):
 
     print('быков:', bulls, ', коров:', cow)
 
-    if bulls==3:
-        endgames(user_number)
+    return bulls, cow
 
 
 def endgames(user_number):
