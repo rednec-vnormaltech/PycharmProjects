@@ -1,42 +1,51 @@
 # -*- coding: utf-8 -*-
 
-import python_snippets.mastermind_engine as m_e
+import mastermind_engine as m_e
 from termcolor import cprint, colored
 import tkinter as tk
 
 
 def clicked():
     res = "Вы ввели: {}".format(txt.get())
-    lbl_0.configure(text=res, fg="green yellow") # при нажатии кнопки выводит текст в lbl_0 который пустой
+    lbl_0.configure(text=res, fg="green yellow")  # при нажатии кнопки выводит текст в lbl_0 который пустой
     # зарезервированый для этого
 
 
 window = tk.Tk()
-window.title("Добро пожаловать в игру Bulls & Cow") # Заголовок окна программы
-window.geometry('700x550') # размер окна программы
-window.configure(bg="gray22") # цвет фона всего окна
-#window['bg']="gray22" # цвет фона всего окна еще вариант с применением свойства
+window.title("Добро пожаловать в игру Bulls & Cow")  # Заголовок окна программы
 
-lbl_0 = tk.Label(window, font=("Arial Bold", 15),  bg="gray22")  # Пустой label зарезервед для вывода ответов
-lbl_0.grid(column=0, row=0)  # расположение
+window.eval('tk::PlaceWindow . center')  # код запуска окна по центру
+window.wm_geometry('700x550')  # размер окна программы
 
-lbl_1 = tk.Label(window, text="Введите число", font=("Arial Bold", 15), bg="cyan")
-lbl_1.grid(column=0, row=1)  # расположение
+window.configure(bg="gray22")  # цвет фона всего окна
+# window['bg']="gray22" # цвет фона всего окна еще вариант с применением свойства
+
+# БЛОК РАБОТЫ С ГРАФИКОЙ
+lbl_0 = tk.Label(window, font=("Arial Bold", 15), bg="gray22")  # Пустой label зарезервед для вывода ответов
+lbl_0.grid(column=5, row=1)  # расположение после кнопки старт
+
+m_e.riddle_number()
+lbl_0_0 = tk.Label(window, font=("Arial Bold", 15), bg="gray22")  # Пустой label для отступа первой строки
+lbl_0_0.grid(column=0, row=0)  # расположение первая строка
+
+lbl_1 = tk.Label(window, text="Введите число:", font=("Arial Bold", 15), bg="cyan")
+lbl_1.grid(column=0, row=1, sticky='w')  # расположение
 
 lbl_0_2 = tk.Label(window, font=("Arial Bold", 10), width=3, bg="gray22")  # пустой lable перед текстовой строкой
-lbl_0_2.grid(column=1, row=1)  # расположение "перед кнопкой start"
+lbl_0_2.grid(column=1, row=1)  # расположение "перед текстовой строкой"
 
-txt = tk.Entry(window, width=15 )  # код текстового поля
+txt = tk.Entry(window, width=15)  # код текстового поля
 txt.grid(column=2, row=1)  # расположение
 txt.focus()  # данный код ставит курсор в тестовое поле при запуске программы
-
 
 lbl_0_1 = tk.Label(window, font=("Arial Bold", 10), width=3, bg="gray22")  # пустой lable перед кнопкой
 lbl_0_1.grid(column=3, row=1)  # расположение "перед кнопкой start"
 
-btn = tk.Button(window, text="Start!", command=clicked, width=10, bg="blue", fg="cyan")  # код кнопки
+btn = tk.Button(window, text="Start!", font=("Arial Bold", 15), command=clicked, width=10, bg="blue",
+                fg="cyan")  # код кнопки
 btn.grid(column=4, row=1)  # расположение
-window.mainloop()
+
+window.mainloop()  # я так понимаю финалочка данные набрали и окно запустили Вызывает основной цикл из Tk()
 
 # Игра «Быки и коровы»
 # https://goo.gl/Go2mb9
@@ -95,3 +104,5 @@ while True:
     if m_e.bulls == 3:
         m_e.endgames(user_number)
         break
+
+
