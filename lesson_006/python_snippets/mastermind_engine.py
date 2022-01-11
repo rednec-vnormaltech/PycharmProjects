@@ -12,7 +12,7 @@ def riddle_number():
     cprint('Загаданное число {}'.format(_secret_number), 'cyan')
 
 
-def check_number(number_players):
+def check_number(number_players,user_number):
     """Проверяет число введенное пользователем и
         возвращает словарь {'bulls': N, 'cows': N}
         НО СНАЧАЛА СДЕЛАЕМ ФУНКЦИЮ СПИСКОМ
@@ -54,4 +54,11 @@ def check_number(number_players):
     print(x, y, z)
     print(x1, y1, z1)
 
-    print(bulls, ',', cow)
+    print('быков:', bulls, ', коров:', cow)
+
+    if bulls==3:
+        endgames(user_number)
+
+
+def endgames(user_number):
+    cprint('Выйграл игрок номер {}'.format(user_number), color='red')

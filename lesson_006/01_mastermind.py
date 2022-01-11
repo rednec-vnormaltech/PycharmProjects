@@ -49,13 +49,14 @@ user_number = 1
 while True:
     cprint('Число загадано', color='yellow')
     user_color = 'blue' if user_number == 1 else 'green'
-    cprint('Ход игрока {}'.format(user_number), color=user_color)
-    pos = input(colored('Введите число', color=user_color))
-    m_e.check_number(pos)
+    if  not m_e.endgames():
+        cprint('Ход игрока {}'.format(user_number), color=user_color)
+        pos = input(colored('Введите число', color=user_color))
+        m_e.check_number(pos, user_number)
 
 
 
-#cprint('Выйграл игрок номер {}'.format(user_number), color='red')
+
 
 
 
