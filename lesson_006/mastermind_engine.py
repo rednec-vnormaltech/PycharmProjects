@@ -2,6 +2,7 @@ from random import randint
 from termcolor import cprint
 
 _secret_number = []
+sn = []
 bulls = 0
 cow = 0
 
@@ -9,8 +10,9 @@ cow = 0
 def riddle_number():
     """Функция загадывает случайное число"""
 
-    global _secret_number
+    global _secret_number, sn
     _secret_number = randint(1, 1000)
+    sn = _secret_number
     cprint('Загаданное число {}'.format(_secret_number), 'cyan')
 
 

@@ -5,10 +5,13 @@ from termcolor import cprint, colored
 import tkinter as tk
 
 
+
 def clicked():
     res = "Вы ввели: {}".format(txt.get())
     lbl_0.configure(text=res, fg="green yellow")  # при нажатии кнопки выводит текст в lbl_0 который пустой
     # зарезервированый для этого
+
+    lbl_0_0.configure(text=m_e.sn)# ВРЕМЕНННО НА lbl_0_0 высвечиваем загаданное число
 
 
 window = tk.Tk()
@@ -24,7 +27,6 @@ window.configure(bg="gray22")  # цвет фона всего окна
 lbl_0 = tk.Label(window, font=("Arial Bold", 15), bg="gray22")  # Пустой label зарезервед для вывода ответов
 lbl_0.grid(column=5, row=1)  # расположение после кнопки старт
 
-m_e.riddle_number()
 lbl_0_0 = tk.Label(window, font=("Arial Bold", 15), bg="gray22")  # Пустой label для отступа первой строки
 lbl_0_0.grid(column=0, row=0)  # расположение первая строка
 
@@ -44,6 +46,8 @@ lbl_0_1.grid(column=3, row=1)  # расположение "перед кнопк
 btn = tk.Button(window, text="Start!", font=("Arial Bold", 15), command=clicked, width=10, bg="blue",
                 fg="cyan")  # код кнопки
 btn.grid(column=4, row=1)  # расположение
+
+m_e.riddle_number()# деф загадывания числа затем передаем его в батон
 
 window.mainloop()  # я так понимаю финалочка данные набрали и окно запустили Вызывает основной цикл из Tk()
 
