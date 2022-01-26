@@ -8,10 +8,17 @@ import tkinter as tk
 
 def clicked():
     res = "Вы ввели: {}".format(txt.get())
+    res1 = txt.get()
     lbl_0.configure(text=res, fg="green yellow")  # при нажатии кнопки выводит текст в lbl_0 который пустой
     # зарезервированый для этого
 
     lbl_0_0.configure(text=m_e.sn)# ВРЕМЕНННО НА lbl_0_0 высвечиваем загаданное число
+
+    if int(res1) == m_e.sn:
+        lbl_otvet.configure(text="Вы угадали", bg="white")
+    else:
+        lbl_otvet.configure(text="Вы не угадали", bg="white")
+
 
 
 window = tk.Tk()
@@ -30,7 +37,7 @@ lbl_0.grid(column=5, row=1)  # расположение после кнопки 
 lbl_0_0 = tk.Label(window, font=("Arial Bold", 15), bg="gray22")  # Пустой label для отступа первой строки
 lbl_0_0.grid(column=0, row=0)  # расположение первая строка
 
-lbl_1 = tk.Label(window, text="Введите число:", font=("Arial Bold", 15), bg="cyan")
+lbl_1 = tk.Label(window, text="Введите число: ", font=("Arial Bold", 15), bg="cyan")
 lbl_1.grid(column=0, row=1, sticky='w')  # расположение
 
 lbl_0_2 = tk.Label(window, font=("Arial Bold", 10), width=3, bg="gray22")  # пустой lable перед текстовой строкой
@@ -40,12 +47,15 @@ txt = tk.Entry(window, width=15)  # код текстового поля
 txt.grid(column=2, row=1)  # расположение
 txt.focus()  # данный код ставит курсор в тестовое поле при запуске программы
 
-lbl_0_1 = tk.Label(window, font=("Arial Bold", 10), width=3, bg="gray22")  # пустой lable перед кнопкой
-lbl_0_1.grid(column=3, row=1)  # расположение "перед кнопкой start"
+lbl_otvet = tk.Label(window, font=("Arial Bold", 10), width=3, bg="gray22")  # пустой lable перед кнопкой
+lbl_otvet.grid(column=3, row=1)  # расположение "перед кнопкой start"
 
-btn = tk.Button(window, text="Start!", font=("Arial Bold", 15), command=clicked, width=10, bg="blue",
+btn = tk.Button(window, text="Start!", font=("Arial Bold", 15),justify="left" , command=clicked, width=10, bg="blue",
                 fg="cyan")  # код кнопки
 btn.grid(column=4, row=1)  # расположение
+
+lbl_otvet = tk.Label(window,  font=("Arial Bold", 15), width=14, justify ="left")  # lable ответ игроку
+lbl_otvet.grid(column=0, row=2)
 
 m_e.riddle_number()# деф загадывания числа затем передаем его в батон
 
