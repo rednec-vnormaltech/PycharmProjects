@@ -1,33 +1,28 @@
-# Эмуляция операций и операторов python с помощью специальных методов
-
-# Эмуляция операторов сравнения
-#
-# object.__eq__(self, other) - равенство двух объектов ==
-# object.__ne__(self, other) - не равно !=
-# object.__lt__(self, other) - строго меньше <
-# object.__le__(self, other) - меньше или равно <=
-# object.__gt__(self, other) - строго больше >
-# object.__ge__(self, other) - больше или равно >=
-#
-# должны возвращать boolean - True/False
-
-class Backpack:
-    """ Рюкзак """
-
-    def __init__(self, gift=None):
-        self.content = []
-        if gift:
-            self.content.append(gift)
-
-    def __eq__(self, other):
-        return self.content == other.content
+from random import choice
 
 
-my_backpack = Backpack(gift='бутерброд')
-son_backpack = Backpack(gift='бутерброд')
+class SomeClass:
+    x = 85
 
-if my_backpack == son_backpack:
-    print('Как мы похожи...')
+    def __init__(self):
+        self.x = 178
 
-if Backpack.__eq__(self=my_backpack, other=son_backpack):
-    print('Как мы похожи...')
+    def method_one(self):
+        x = 23
+        print('method_one', self.x)
+
+    def method_two(self):
+        x = 34
+        def func_one():
+             # x = 56
+            print('func_one', SomeClass.x)
+
+        func_one()
+        print('method_two', x)
+
+
+x = 12
+obj = SomeClass()
+obj.method_one()
+obj.method_two()
+print('global', x)
