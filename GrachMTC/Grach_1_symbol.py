@@ -20,4 +20,3 @@ if __name__ == '__main__':  # Точка входа при запуске это
     cerebro.addstrategy(tss.Grach_SMA_Strategy)  # Добавляем торговую систему
     cerebro.run()  # Запуск торговой системы
     cerebro.plot(style='candlestick', barup='g', bardown='b')  # Рисуем график. Требуется matplotlib версии 3.2.2 (pip install matplotlib==3.2.2)
-    print("jugdf")
