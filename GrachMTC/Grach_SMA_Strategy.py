@@ -16,8 +16,8 @@ class Grach_SMA_Strategy(bt.Strategy):
         ('period_slow_sma', 6),  # Период SMA2
     )
 
-    account = 'SPBFUTLS12r'  # БКС
-    # account = '76008T3' # Финам
+    #account = 'SPBFUTLS12r'  # БКС
+    account = '76008T3' # Финам
     classCode = 'SPBFUT'  # Код площадки
     secCode = 'VBZ2'  # Код тикера
     TransId = 11772341  # Номер транзакции
