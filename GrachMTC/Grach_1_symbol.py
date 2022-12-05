@@ -15,7 +15,7 @@ if __name__ == '__main__':  # Точка входа при запуске это
     store = QKStore()  # Хранилище QUIK (QUIK на локальном компьютере)
     #data = store.getdata(dataname=symbol, timeframe=TimeFrame.Days, fromdate=datetime(2018, 1, 1), LiveBars=False)  # Исторические дневные бары с заданной даты
     #data = store.getdata(dataname=symbol, timeframe=TimeFrame.Minutes, compression=1, LiveBars=False)  # Исторические минутные бары за все время
-    data = store.getdata(dataname=symbol, timeframe=TimeFrame.Minutes, fromdate=datetime(2022, 9, 15, 7, 0), compression=1, LiveBars=True)  # Исторические и новые минутные бары за все время
+    data = store.getdata(dataname=symbol, timeframe=TimeFrame.Minutes, fromdate=datetime(2022, 10, 15, 7, 0), compression=1, LiveBars=True)  # Исторические и новые минутные бары за все время
     cerebro.adddata(data)  # Добавляем данные
     cerebro.addstrategy(tss.Grach_SMA_Strategy)  # Добавляем торговую систему
     cerebro.run()  # Запуск торговой системы
