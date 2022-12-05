@@ -57,7 +57,7 @@ class Grach_SMA_Strategy(bt.Strategy):
         """Выставление заявок в quik"""
         # Блок входа в Long
         if self.crossover > 0 and self.isLive == True:  # если цена пересекла fast_sma снизу вверх и свеча новая
-            print("\033[33m{}".format("Сработало условие на покупку "), int(self.datas[0].close[0] * 100000))
+            print("\033[32m{}".format("Сработало условие на покупку "), int(self.datas[0].close[0] * 100000))
             #KILL_ALL_FUTURES_ORDERS_BUY()
             #KILL_ALL_FUTURES_ORDERS_SELL()
             #LimitLongtEntry(int(self.datas[0].close[0] * 100000))   # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из КОРОТКОЙ позиции
