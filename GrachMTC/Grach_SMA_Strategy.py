@@ -51,6 +51,7 @@ class Grach_SMA_Strategy(bt.Strategy):
 
     def next(self):
         """Приход нового бара тикера"""
+        print(f'Текущий стакан {Grach_SMA_Strategy.classCode}.{Grach_SMA_Strategy.secCode}:', qpProvider.GetQuoteLevel2(Grach_SMA_Strategy.classCode, Grach_SMA_Strategy.secCode)['data'])  # подписка на стакан
         if self.p.name != '':  # Если указали название торговой системы, то будем ждать прихода всех баров
             lastdatetimes = [bt.num2date(data.datetime[0]) for data in self.datas]  # Дата и время последнего бара каждого тикера
             if lastdatetimes.count(lastdatetimes[0]) != len(lastdatetimes):  # Если дата и время последних баров не идентичны
