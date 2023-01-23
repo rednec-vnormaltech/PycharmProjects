@@ -1,4 +1,6 @@
 import backtrader as bt
+from datetime import datetime
+import time  # Подписка на события по времени
 from QuikPy import QuikPy  # Работа с Quik из Python через LUA скрипты QuikSharp
 
 qpProvider = QuikPy()
@@ -12,16 +14,19 @@ class Grach_SMA_Strategy(bt.Strategy):
     params = (  # Параметры торговой системы
         ('name', ''),  # Название торговой системы
         ('symbols', ''),  # Список торгуемых тикеров. По умолчанию торгуем все тикеры
-        ('period_fast_sma', 3),  # Период SMA1
-        ('period_slow_sma', 6),  # Период SMA2
+        ('period_fast_sma', 13),  # Период SMA1
+        ('period_slow_sma', 27),  # Период SMA2
     )
 
-    #account = 'SPBFUTLS12r'  # БКС
     account = '76008T3' # Финам
     classCode = 'SPBFUT'  # Код площадки
-    secCode = 'VBZ2'  # Код тикера
+    secCode = 'VBH3'  # Код тикера
     TransId = 11772341  # Номер транзакции
     quantity = 1  # Кол-во в лотах
+
+    counterPos = 0 # счетчик позиции 1 - в позиции купили; -1 - в позиции продали; 0 - нет позиции.  Возможно эта инфа храниться в self.position
+
+
 
     def log(self, txt, dt=None):
         """Вывод строки с датой на консоль"""
@@ -29,6 +34,7 @@ class Grach_SMA_Strategy(bt.Strategy):
         print(f'{dt.strftime("%d.%m.%Y %H:%M")}, {txt}')  # Выводим дату и время с заданным текстом на консоль
 
         """Вывод строки с датой, sma  и больше меньше  на консоль"""
+        print("\033[37m{}".format(""), int(self.datas[0].close[0] * 100000))
         if self.datas[0].close[0] > self.fast_sma[0]:
            print(f'********************************************************************************************** {int(self.datas[0].close[0] * 100000)} , {self.fast_sma[0]* 100000:.3f}, больше ')
         elif self.datas[0].close[0] < self.fast_sma[0]:
@@ -63,7 +69,8 @@ class Grach_SMA_Strategy(bt.Strategy):
             #LimitLongtEntry(int(self.datas[0].close[0] * 100000))   # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из КОРОТКОЙ позиции
 
             if not self.position:  # Если позиции нет
-                print("self.position: ", self.position, " Покупка по цене", int(self.datas[0].close[0] * 100000))
+                print("self.position: ", self.position, " Покупка по цене", int(self.datas[0].close[0] * 100000), self.counterPos == 1)
+                print(f'Текущий стакан {Grach_SMA_Strategy.classCode}.{Grach_SMA_Strategy.secCode}:', qpProvider.GetQuoteLevel2(Grach_SMA_Strategy.classCode, Grach_SMA_Strategy.secCode)['data']) # подписка на стакан
                 #LimitLongEntry(int(self.datas[0].close[0] * 100000))
 
         # Блок входа в Short
@@ -75,7 +82,7 @@ class Grach_SMA_Strategy(bt.Strategy):
 
 
             if not self.position:  # Если позиции нет
-                print("self.position: ", self.position, " Продажа по цене", int(self.datas[0].close[0] * 100000))
+                print("self.position: ", self.position, " Продажа по цене", int(self.datas[0].close[0] * 100000), self.counterPos == -1)
                 #LimitShortEntry(int(self.datas[0].close[0] * 100000))
 
     def notify_data(self, data, status, *args, **kwargs):
