@@ -2,6 +2,7 @@ import backtrader as bt
 from datetime import datetime
 import time  # Подписка на события по времени
 from QuikPy import QuikPy  # Работа с Quik из Python через LUA скрипты QuikSharp
+import re
 
 qpProvider = QuikPy()
 
@@ -9,22 +10,28 @@ qpProvider = QuikPy()
 """Long/Short - лимитные заявки"""
 """Выходы из Long/Short Лимитные заявки(по умолчанию) или Стоп-Заявка c Тэйк-профит и стоп-лимит"""
 
+
 class Grach_SMA_Strategy(bt.Strategy):
     """- Отображает статус подключения- При приходе нового бара отображает его цены/объем- Отображает статус перехода к новым барам"""
     params = (  # Параметры торговой системы
         ('name', ''),  # Название торговой системы
         ('symbols', ''),  # Список торгуемых тикеров. По умолчанию торгуем все тикеры
-        ('period_fast_sma', 13),  # Период SMA1
+        ('period_fast_sma', 2),  # Период SMA1
         ('period_slow_sma', 27),  # Период SMA2
     )
 
-    account = '76008T3' # Финам
+    account = '76008T3'  # Финам
     classCode = 'SPBFUT'  # Код площадки
     secCode = 'VBH3'  # Код тикера
     TransId = 11772341  # Номер транзакции
     quantity = 1  # Кол-во в лотах
 
-    counterPos = 0 # счетчик позиции 1 - в позиции купили; -1 - в позиции продали; 0 - нет позиции.  Возможно эта инфа храниться в self.position
+    # работаем со стаканом получаем бид и аск
+    stakan_all = qpProvider.GetQuoteLevel2(classCode, secCode)['data'] # Получаем весь стакан
+    priceBuy_count = str(stakan_all["bid"]) # Строка содержит все предлоежения на покупку
+    priceSell_count = str(stakan_all["offer"]) # Строка содержит все предлоежения на ппродажу
+
+
 
 
 
@@ -36,9 +43,9 @@ class Grach_SMA_Strategy(bt.Strategy):
         """Вывод строки с датой, sma  и больше меньше  на консоль"""
         print("\033[37m{}".format(""), int(self.datas[0].close[0] * 100000))
         if self.datas[0].close[0] > self.fast_sma[0]:
-           print(f'********************************************************************************************** {int(self.datas[0].close[0] * 100000)} , {self.fast_sma[0]* 100000:.3f}, больше ')
+            print(f'********************************************************************************************** {int(self.datas[0].close[0] * 100000)} , {self.fast_sma[0] * 100000:.3f}, больше ')
         elif self.datas[0].close[0] < self.fast_sma[0]:
-           print(f'********************************************************************************* {int(self.datas[0].close[0] * 100000)} , {self.fast_sma[0]* 100000:.3f}, меньше ')
+            print(f'********************************************************************************* {int(self.datas[0].close[0] * 100000)} , {self.fast_sma[0] * 100000:.3f}, меньше ')
 
     def __init__(self):
         """Инициализация торговой системы"""
@@ -51,7 +58,9 @@ class Grach_SMA_Strategy(bt.Strategy):
 
     def next(self):
         """Приход нового бара тикера"""
-        print(f'Текущий стакан {Grach_SMA_Strategy.classCode}.{Grach_SMA_Strategy.secCode}:', qpProvider.GetQuoteLevel2(Grach_SMA_Strategy.classCode, Grach_SMA_Strategy.secCode)['data'])  # подписка на стакан
+        print(re.findall(r'\b\d+\b', Grach_SMA_Strategy.priceBuy_count)[-2])# содержит лучший спрос из стакана
+        print(re.findall(r'\b\d+\b', Grach_SMA_Strategy.priceSell_count)[0])# содержит лучшее предложение из стакана
+
         if self.p.name != '':  # Если указали название торговой системы, то будем ждать прихода всех баров
             lastdatetimes = [bt.num2date(data.datetime[0]) for data in self.datas]  # Дата и время последнего бара каждого тикера
             if lastdatetimes.count(lastdatetimes[0]) != len(lastdatetimes):  # Если дата и время последних баров не идентичны
@@ -65,26 +74,27 @@ class Grach_SMA_Strategy(bt.Strategy):
         # Блок входа в Long
         if self.crossover > 0 and self.isLive == True:  # если цена пересекла fast_sma снизу вверх и свеча новая
             print("\033[32m{}".format("Сработало условие на покупку "), int(self.datas[0].close[0] * 100000))
-            #KILL_ALL_FUTURES_ORDERS_BUY()
-            #KILL_ALL_FUTURES_ORDERS_SELL()
-            #LimitLongtEntry(int(self.datas[0].close[0] * 100000))   # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из КОРОТКОЙ позиции
+            # KILL_ALL_FUTURES_ORDERS_BUY()
+            # KILL_ALL_FUTURES_ORDERS_SELL()
+            # LimitLongtEntry(int(self.datas[0].close[0] * 100000))   # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из КОРОТКОЙ позиции
 
             if not self.position:  # Если позиции нет
-                print("self.position: ", self.position, " Покупка по цене", int(self.datas[0].close[0] * 100000), self.counterPos == 1)
-                print(f'Текущий стакан {Grach_SMA_Strategy.classCode}.{Grach_SMA_Strategy.secCode}:', qpProvider.GetQuoteLevel2(Grach_SMA_Strategy.classCode, Grach_SMA_Strategy.secCode)['data']) # подписка на стакан
-                #LimitLongEntry(int(self.datas[0].close[0] * 100000))
+                print("self.position: ", self.position, " Покупка по :","Средняя цена", int(self.datas[0].close[0] * 100000), "Цена лучшего предложения", re.findall(r'\b\d+\b', Grach_SMA_Strategy.priceSell_count)[0])
+                #print(f'Текущий стакан {Grach_SMA_Strategy.classCode}.{Grach_SMA_Strategy.secCode}:', qpProvider.GetQuoteLevel2(Grach_SMA_Strategy.classCode, Grach_SMA_Strategy.secCode)['data'])  # подписка на стакан
+                # LimitLongEntry(int(self.datas[0].close[0] * 100000))
+
+
 
         # Блок входа в Short
-        if self.crossover < 0 and self.isLive == True: # если цена пересекла fast_sma сверху вниз и свеча новая
+        if self.crossover < 0 and self.isLive == True:  # если цена пересекла fast_sma сверху вниз и свеча новая
             print("\033[34m{}".format("Сработало условие на продажу "), int(self.datas[0].close[0] * 100000))
-            #KILL_ALL_FUTURES_ORDERS_SELL()
-            #KILL_ALL_FUTURES_ORDERS_BUY()
-            #LimitShortEntry(int(self.datas[0].close[0] * 100000)) # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из ДЛИННОЙ позиции
-
+            # KILL_ALL_FUTURES_ORDERS_SELL()
+            # KILL_ALL_FUTURES_ORDERS_BUY()
+            # LimitShortEntry(int(self.datas[0].close[0] * 100000)) # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из ДЛИННОЙ позиции
 
             if not self.position:  # Если позиции нет
-                print("self.position: ", self.position, " Продажа по цене", int(self.datas[0].close[0] * 100000), self.counterPos == -1)
-                #LimitShortEntry(int(self.datas[0].close[0] * 100000))
+                print("self.position: ", self.position, " Продажа по цене", int(self.datas[0].close[0] * 100000))
+                # LimitShortEntry(int(self.datas[0].close[0] * 100000))
 
     def notify_data(self, data, status, *args, **kwargs):
         """Изменение статсуса приходящих баров"""
@@ -112,7 +122,7 @@ def LimitLongEntry(n):
         'TYPE': 'L'}  # L = лимитная заявка (по умолчанию), M = рыночная заявка
     print(f'Новая лимитная заявка на вход в длинную позицию отправлена на рынок: {qpProvider.SendTransaction(transaction)["data"]}')
 
-    #Long_TAKE_PROFIT_AND_STOP_LIMIT_ORDER(n)  # После входа в длинную позицию выставляем стоп-заявку на Тэйк-профит и стоп-лимит
+    # Long_TAKE_PROFIT_AND_STOP_LIMIT_ORDER(n)  # После входа в длинную позицию выставляем стоп-заявку на Тэйк-профит и стоп-лимит
 
 
 def LimitShortEntry(n):
@@ -133,7 +143,7 @@ def LimitShortEntry(n):
         'TYPE': 'L'}  # L = лимитная заявка (по умолчанию), M = рыночная заявка
     print(f'Новая лимитная заявка на вход в короткую позицию отправлена на рынок: {qpProvider.SendTransaction(transaction)["data"]}')
 
-    #Short_TAKE_PROFIT_AND_STOP_LIMIT_ORDER(n) # После входа в короткую позицию выставляем стоп-заявку на Тэйк-профит и стоп-лимит
+    # Short_TAKE_PROFIT_AND_STOP_LIMIT_ORDER(n) # После входа в короткую позицию выставляем стоп-заявку на Тэйк-профит и стоп-лимит
 
 
 def Long_TAKE_PROFIT_AND_STOP_LIMIT_ORDER(n):
