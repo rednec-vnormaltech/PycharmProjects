@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7d569f8f-cac8-4583-b720-7788550215e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/PycharmProjects.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BackTraderQuik" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/.idea/GrachMTC.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/Entrys_Exits.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/Grach_ADX.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GrachMTC/Stakan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PyAutoTrading/.idea/pythonProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pythonProject/.idea/pythonProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SPBFUT.CRH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/.idea/testQuik.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/BrokerExamples/01 - LiveTradingEvents.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/BrokerExamples/02 - LimitCancel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/BrokerExamples/03 - OCO.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/BrokerExamples/04 - Brackets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.ALH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.ALH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.ALH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.ALH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.ALH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.CRH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.CRH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.CRH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.CRH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.CRH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GKH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GKH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GKH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GKH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GKH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GZH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GZH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GZH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GZH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.GZH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.LKH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.LKH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.LKH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.LKH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.LKH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MMH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MMH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MMH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MMH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MMH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MNH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MNH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MNH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MNH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.MNH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.POH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.POH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.POH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.POH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.POH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.PZH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.PZH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.PZH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.PZH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.PZH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.RIH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.RIH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.RIH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.RIH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.RIH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SPH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SPH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SPH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SPH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SPH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SRH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SRH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SRH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SRH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SRH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SiH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SiH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SiH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SiH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.SiH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.VBH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.VBH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.VBH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.VBH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.VBH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.YNH3_D1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.YNH3_M1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.YNH3_M15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.YNH3_M5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Data/SPBFUT.YNH3_M60.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/DataExamples/01 - Symbol.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/DataExamples/02 - Symbols.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/DataExamples/03 - Timeframes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/DataExamples/04 - Resample.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/DataExamples/05 - Replay.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/DataExamples/06 - Rollover.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/DataExamples/Strategy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Examples/01 - Connect.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Examples/02 - Accounts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Examples/03 - Ticker.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Examples/04 - Bars.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Examples/05 - Stream.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Examples/06 - Transactions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/Examples/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/Examples/01 - Connect.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/Examples/02 - Accounts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/Examples/03 - Ticker.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/Examples/04 - Bars.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/Examples/05 - Stream.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/Examples/06 - Transactions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/Examples/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/QuikSharp.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/Quik_2.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/dkjson.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/qscallbacks.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/qsfunctions.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/qsutils.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/lua/socket.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QUIK/socket/core.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/QuikPy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/QuikPy/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testQuik/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GrachMTC/Grach_SMA_Strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GrachMTC/Grach_SMA_Strategy.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2LJzRrxjuwgrpAQ52wO0ZXfM6cb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="testBT01" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7d569f8f-cac8-4583-b720-7788550215e5" name="Changes" comment="" />
+      <created>1675603967884</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675603967884</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
