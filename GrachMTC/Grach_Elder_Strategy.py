@@ -2,10 +2,13 @@ import backtrader as bt
 from QuikPy import QuikPy  # Работа с Quik из Python через LUA скрипты QuikSharp
 
 
-"""Торговая система пересечения close и sma ПЕРЕВОРОТНАЯ """
-"""Long/Short - лимитные заявки"""
+"""Торговая система 3 Окна Элдера """
+"""1) На старшем таймфрейме определяем текущее направление тренда """
+"""2) На среднем таймфрейме определяем текущее направление тренда """
+"""3) При условии совпадения направления трендов на старшем и срелнем таймфрейме"""
+"""   Входим в сделку в направлении основного тренда при пересечении Close fast_sma  """
+"""   На младшем таймфрейме  """
 qpProvider = QuikPy()
-
 
 def poison():  # Определяем есть ли позиция если есть то какая  1 buy  -1 sell
     futuresHoldings = qpProvider.GetFuturesHoldings()['data']  # Все фьючерсные позиции
@@ -20,15 +23,12 @@ def poison():  # Определяем есть ли позиция если ес
         return 0
 
 
-class Grach_SMA_Cross_Strategy(bt.Strategy):
+class Grach_Elder_Strategy(bt.Strategy):
     """- Отображает статус подключения- При приходе нового бара отображает его цены/объем- Отображает статус перехода к новым барам"""
     params = (  # Параметры торговой системы
         ('name', ''),  # Название торговой системы
         ('symbols', ''),  # Список торгуемых тикеров. По умолчанию торгуем все тикеры
         ('period_fast_sma', 3),  # Период SMA1
-        ('ADXPeriod', 14),  # Период ADX
-        ('ADXLevelmin', 10),  # Уровень ADX
-        ('ADXLevelmax', 35),  # Уровень ADX
     )
 
     # Эти параметры ипользуются только в заявках
@@ -51,27 +51,20 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
         self.fast_sma5 = bt.indicators.SMA(self.data1, period=self.p.period_fast_sma)  # инициализация индикатора fast_SMA с параметрами 5-минутки
         self.fast_sma15 = bt.indicators.SMA(self.data2, period=self.p.period_fast_sma)  # инициализация индикатора fast_SMA с параметрами 15-минутки
 
-
         self.crossover = bt.indicators.CrossOver(self.data, self.fast_sma)  # инициализация пересечения fast_SMA и close  1-минутки
         self.crossover5 = bt.indicators.CrossOver(self.data1, self.fast_sma5)  # инициализация пересечения fast_SMA и close 5-минутки
         self.crossover15 = bt.indicators.CrossOver(self.data2, self.fast_sma15)  # инициализация пересечения fast_SMA и close 15-минутки
 
-        self.ADX = bt.indicators.AverageDirectionalMovementIndex(self.data, period=self.p.ADXPeriod)  # ADX  1-минутки
-        self.ADX5 = bt.indicators.AverageDirectionalMovementIndex(self.data1, period=self.p.ADXPeriod) # ADX  5-минутки
-        self.ADX15 = bt.indicators.AverageDirectionalMovementIndex(self.data2, period=self.p.ADXPeriod) # ADX  15-минутки
-
     def next(self):
         """Приход нового бара тикера"""
-        print(f'  Close = {int(self.datas[0].close[0] * 100000)},   fast_sma = {self.fast_sma[0]*100000:.1f},   ADX = {self.ADX[0]:.1f}')
-        print(f' Close5 = {int(self.datas[1].close[0] * 100000)},  fast_sma5 = {self.fast_sma5[0] * 100000:.1f},  ADX5 = {self.ADX5[0]:.1f}')
-        print(f'Close15 = {int(self.datas[2].close[0] * 100000)}, fast_sma15 = {self.fast_sma15[0] * 100000:.1f}, ADX15 = {self.ADX15[0]:.1f}')
+        print(f'  Close = {int(self.datas[0].close[0] * 100000)},   fast_sma = {self.fast_sma[0]*100000:.1f}')
+        print(f' Close5 = {int(self.datas[1].close[0] * 100000)},  fast_sma5 = {self.fast_sma5[0] * 100000:.1f}')
+        print(f'Close15 = {int(self.datas[2].close[0] * 100000)}, fast_sma15 = {self.fast_sma15[0] * 100000:.1f}')
 
-        # При приходе каждой нового(живой свечи) удаляем все активные заявки
+         # При приходе каждой нового(живой свечи) удаляем все активные заявки
        # if self.isLive:
        #     Grach_SMA_Strategy.KILL_ALL_FUTURES_ORDERS_BUY(self)
        #     Grach_SMA_Strategy.KILL_ALL_FUTURES_ORDERS_SELL(self)
-       #     print("fast_sma=", self.fast_sma[0]*100000)
-       #     print("ADX=", self.ADX[0])
 
         if self.p.name != '':  # Если указали название торговой системы, то будем ждать прихода всех баров
             lastdatetimes = [bt.num2date(data.datetime[0]) for data in self.datas]  # Дата и время последнего бара каждого тикера
@@ -82,48 +75,43 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
             if self.p.symbols == '' or data._dataname in self.p.symbols:  # Если торгуем все тикеры или данный тикер
                 self.log(f'{data._dataname} - {bt.TimeFrame.Names[data.p.timeframe]} {data.p.compression} - Open={data.open[0] * 100000:.2f}, High={data.high[0] * 100000:.2f}, Low={data.low[0] * 100000:.2f}, Close={data.close[0] * 100000:.2f}, Volume={data.volume[0] * 100:.0f}', bt.num2date(data.datetime[0]))
 
-
         """Выставление заявок в quik"""
-        if poison() == 0:
+        if poison() == 0: # Если открытых позиций НЕТ
             print("\nОткрытых позиций нет", poison())
 
             # Блок входа в Long
-            if self.crossover > 0 and self.isLive == True:  # если цена пересекла fast_sma снизу вверх и свеча новая
-                #if self.ADX[0] > self.p.ADXLevelmin:  допусловие если ADX пересекает снизу вверх уровень 10
-                #if self.ADX[0] >0:
-                    print("\033[32m{}".format("\nСработало условие на покупку:"))
-                    print(f'Цена Close ={int(self.datas[0].close[0] * 100000)} персекла Снизу-Вверх( UP) fast_sma={self.fast_sma[0]*100000:.1f} ADX = {self.ADX[0]:.1f}')
-                    print("\033[0m{}".format("\n"))
-
-                    Grach_SMA_Cross_Strategy.LimitLongEntry(int(self.datas[0].close[0] * 100000), 1)  # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из КОРОТКОЙ позиции
+            if self.crossover15 > 0:  # Если на старшем таймфрейме текущее направление тренда UP
+                if self.crossover5 > 0:  # Если на стреднем таймфрейме текущее направление тренда UP
+                    if self.crossover > 0 and self.isLive == True:  # если цена пересекла fast_sma снизу вверх и свеча новая
+                        print("\033[32m{}".format("\nСработало условие на покупку:")) # Выводит текст зеленым цветом
+                        print(f'Цена Close ={int(self.datas[0].close[0] * 100000)} персекла Снизу-Вверх(UP) fast_sma={self.fast_sma[0]*100000:.1f}')
+                        print("\033[0m{}".format("\n")) # Возвращает цвет текста опять на белый
+                        Grach_Elder_Strategy.LimitLongEntry(int(self.datas[0].close[0] * 100000), 1)  # Новая Лимитная-Заявка для входа в ДЛИННУЮ позицию
 
             # Блок входа в Short
-            if self.crossover < 0 and self.isLive == True:  # если цена пересекла fast_sma сверху вниз и свеча новая
-                #if self.ADX[0] > 0:
-                    print("\033[34m{}".format("\nСработало условие на продажу: "))
-                    print(f'Цена Close ={int(self.datas[0].close[0] * 100000)} персекла Сверху-Вниз ( DOWN ) fast_sma={self.fast_sma[0]*100000:.1f} ADX = {self.ADX[0]:.1f}')
-                    print("\033[0m{}".format("\n"))
+            if self.crossover15 < 0: # Если на старшем таймфрейме текущее направление тренда DOWN
+                if self.crossover5 > 0:  # Если на стреднем таймфрейме текущее направление тренда DOWN
+                    if self.crossover < 0 and self.isLive == True:  # если цена пересекла fast_sma сверху вниз и свеча новая
+                         print("\033[34m{}".format("\nСработало условие на продажу: ")) # Выводит текст синим цветом
+                         print(f'Цена Close ={int(self.datas[0].close[0] * 100000)} персекла Сверху-Вниз (DOWN) fast_sma={self.fast_sma[0]*100000:.1f} ')
+                         print("\033[0m{}".format("\n")) # Возвращает цвет текста опять на белый
+                         Grach_Elder_Strategy.LimitShortEntry(int(self.datas[0].close[0] * 100000), 1)  # Новая Лимитная-Заявка для входа в КОРОТКУЮ позицию
 
-                    Grach_SMA_Cross_Strategy.LimitShortEntry(int(self.datas[0].close[0] * 100000), 1)  # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из ДЛИННОЙ позиции
-
-        if poison() == 1:
+        if poison() == 1: # Если открыта позиция BUY
             print("\nОткрыта позиция LONG", poison())
 
             # Блок выхода из Long
             if self.crossover < 0 and self.isLive == True:  # если цена пересекла fast_sma сверху вниз и свеча новая
                 print("\033[34m{}".format("\nСработало условие на продажу "), int(self.datas[0].close[0] * 100000))
+                Grach_Elder_Strategy.LimitShortEntry(int(self.datas[0].close[0] * 100000), 2)  # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из ДЛИННОЙ позиции
 
-
-                Grach_SMA_Cross_Strategy.LimitShortEntry(int(self.datas[0].close[0] * 100000), 2)  # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из ДЛИННОЙ позиции
-
-        if poison() == -1:
+        if poison() == -1: # Если открыта позиция SELL
             print("\nОткрыта позиция SHORT", poison())
 
             # Блок выхода из Short
             if self.crossover > 0 and self.isLive == True:  # если цена пересекла fast_sma снизу вверх и свеча новая
                 print("\033[32m{}".format("\nСработало условие на покупку "), int(self.datas[0].close[0] * 100000))
-
-                Grach_SMA_Cross_Strategy.LimitLongEntry(int(self.datas[0].close[0] * 100000), 2)  # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из КОРОТКОЙ позиции
+                Grach_Elder_Strategy.LimitLongEntry(int(self.datas[0].close[0] * 100000), 2)  # При CROSS торговле с Тэйк-профит и стоп-лимит исполняет выход из КОРОТКОЙ позиции
 
     def notify_data(self, data, status, *args, **kwargs):
         """Изменение статсуса приходящих баров"""
@@ -139,12 +127,12 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
 
         # Новая лимитная-заявка
         transaction = {  # Все значения должны передаваться в виде строк
-            'TRANS_ID': str(Grach_SMA_Cross_Strategy.TransId),  # Номер транзакции задается клиентом
+            'TRANS_ID': str(Grach_Elder_Strategy.TransId),  # Номер транзакции задается клиентом
             # 'CLIENT_CODE': '',  # Код клиента. Для фьючерсов его нет
-            'ACCOUNT': str(Grach_SMA_Cross_Strategy.account),  # Счет финам - 76008T3
+            'ACCOUNT': str(Grach_Elder_Strategy.account),  # Счет финам - 76008T3
             'ACTION': 'NEW_ORDER',  # Тип заявки: Новая заявка
-            'CLASSCODE': str(Grach_SMA_Cross_Strategy.classCode),  # Код площадки
-            'SECCODE': str(Grach_SMA_Cross_Strategy.secCode),  # Код тикера
+            'CLASSCODE': str(Grach_Elder_Strategy.classCode),  # Код площадки
+            'SECCODE': str(Grach_Elder_Strategy.secCode),  # Код тикера
             'OPERATION': 'B',  # B = покупка, S = продажа
             'PRICE': str(price),  # Цена исполнения
             'QUANTITY': str(quan),  # Кол-во в лотах
@@ -158,12 +146,12 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
 
         # Новая лимитная-заявка
         transaction = {  # Все значения должны передаваться в виде строк
-            'TRANS_ID': str(Grach_SMA_Cross_Strategy.TransId),  # Номер транзакции задается клиентом
+            'TRANS_ID': str(Grach_Elder_Strategy.TransId),  # Номер транзакции задается клиентом
             # 'CLIENT_CODE': '',  # Код клиента. Для фьючерсов его нет
-            'ACCOUNT': str(Grach_SMA_Cross_Strategy.account),  # Счет финам - 76008T3
+            'ACCOUNT': str(Grach_Elder_Strategy.account),  # Счет финам - 76008T3
             'ACTION': 'NEW_ORDER',  # Тип заявки: Новая заявка
-            'CLASSCODE': str(Grach_SMA_Cross_Strategy.classCode),  # Код площадки
-            'SECCODE': str(Grach_SMA_Cross_Strategy.secCode),  # Код тикера
+            'CLASSCODE': str(Grach_Elder_Strategy.classCode),  # Код площадки
+            'SECCODE': str(Grach_Elder_Strategy.secCode),  # Код тикера
             'OPERATION': 'S',  # B = покупка, S = продажа
             'PRICE': str(price),  # Цена исполнения
             'QUANTITY': str(quan),  # Кол-во в лотах
@@ -176,15 +164,15 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
 
         # Новая стоп-заявка
         transaction = {  # Все значения должны передаваться в виде строк
-            'TRANS_ID': str(Grach_SMA_Cross_Strategy.TransId),  # Номер транзакции задается клиентом
+            'TRANS_ID': str(Grach_Elder_Strategy.TransId),  # Номер транзакции задается клиентом
             # 'CLIENT_CODE': '',  # Код клиента. Для фьючерсов его нет
-            'ACCOUNT': str(Grach_SMA_Cross_Strategy.account),  # Счет финам - 76008T3 r
+            'ACCOUNT': str(Grach_Elder_Strategy.account),  # Счет финам - 76008T3 r
             'ACTION': 'NEW_STOP_ORDER',  # Тип заявки: Новая заявка
-            'CLASSCODE': str(Grach_SMA_Cross_Strategy.classCode),  # Код площадки
-            'SECCODE': str(Grach_SMA_Cross_Strategy.secCode),  # Код тикера
+            'CLASSCODE': str(Grach_Elder_Strategy.classCode),  # Код площадки
+            'SECCODE': str(Grach_Elder_Strategy.secCode),  # Код тикера
             'OPERATION': 'S',  # B = покупка, S = продажа
             'PRICE': str(price),  # Цена исполнения
-            'QUANTITY': str(Grach_SMA_Cross_Strategy.quantity),  # Кол-во в лотах
+            'QUANTITY': str(Grach_Elder_Strategy.quantity),  # Кол-во в лотах
             'STOPPRICE': str(price + 25),  # ВОЗМОЖНО !!! активация тэйк-профита
             'STOP_ORDER_KIND': 'TAKE_PROFIT_AND_STOP_LIMIT_ORDER',  # Вид стоп-ордера : тэйк-профит и стоп-лимит
             'OFFSET': str(5),  # Величина отступа от максимума (минимума) цены последней сделки
@@ -205,15 +193,15 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
 
         # Новая стоп-заявка
         transaction = {  # Все значения должны передаваться в виде строк
-            'TRANS_ID': str(Grach_SMA_Cross_Strategy.TransId),  # Номер транзакции задается клиентом
+            'TRANS_ID': str(Grach_Elder_Strategy.TransId),  # Номер транзакции задается клиентом
             # 'CLIENT_CODE': '',  # Код клиента. Для фьючерсов его нет
-            'ACCOUNT': str(Grach_SMA_Cross_Strategy.account),  # Счет финам - 76008T3
+            'ACCOUNT': str(Grach_Elder_Strategy.account),  # Счет финам - 76008T3
             'ACTION': 'NEW_STOP_ORDER',  # Тип заявки: Новая заявка
-            'CLASSCODE': str(Grach_SMA_Cross_Strategy.classCode),  # Код площадки
-            'SECCODE': str(Grach_SMA_Cross_Strategy.secCode),  # Код тикера
+            'CLASSCODE': str(Grach_Elder_Strategy.classCode),  # Код площадки
+            'SECCODE': str(Grach_Elder_Strategy.secCode),  # Код тикера
             'OPERATION': 'B',  # B = покупка, S = продажа
             'PRICE': str(price),  # Цена исполнения
-            'QUANTITY': str(Grach_SMA_Cross_Strategy.quantity),  # Кол-во в лотах
+            'QUANTITY': str(Grach_Elder_Strategy.quantity),  # Кол-во в лотах
             'STOPPRICE': str(price - 25),  # ВОЗМОЖНО !!! активация тэйк-профита
             'STOP_ORDER_KIND': 'TAKE_PROFIT_AND_STOP_LIMIT_ORDER',  # Вид стоп-ордера : тэйк-профит и стоп-лимит
             'OFFSET': str(5),  # Величина отступа от максимума (минимума) цены последней сделки
@@ -232,10 +220,10 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
         # Снятие всех заявок на ДЛИННУЮ позицию
         transaction = {  # Все значения должны передаваться в виде строк
             'TRANS_ID': str(1),  # Номер транзакции задается клиентом
-            'ACCOUNT': str(Grach_SMA_Cross_Strategy.account),  # Счет финам - 76008T3
+            'ACCOUNT': str(Grach_Elder_Strategy.account),  # Счет финам - 76008T3
             'ACTION': 'KILL_ALL_FUTURES_ORDERS',  # Тип заявки: Снятие всех заявок на ДЛИННУЮ позицию
-            'CLASSCODE': str(Grach_SMA_Cross_Strategy.classCode),  # Код площадки
-            'SECCODE': str(Grach_SMA_Cross_Strategy.secCode),  # Код тикера
+            'CLASSCODE': str(Grach_Elder_Strategy.classCode),  # Код площадки
+            'SECCODE': str(Grach_Elder_Strategy.secCode),  # Код тикера
             'OPERATION': 'B',  # B = покупка, S = продажа
             'BASE_CONTRACT': "VTBR", }
         print(f'Снятие всех заявок на ДЛИННУЮ позицию отправлена на рынок: {qpProvider.SendTransaction(transaction)["data"]}')
@@ -244,10 +232,10 @@ class Grach_SMA_Cross_Strategy(bt.Strategy):
         # Снятие всех заявок на КОРОТКУЮ позицию
         transaction = {  # Все значения должны передаваться в виде строк
             'TRANS_ID': str(1),  # Номер транзакции задается клиентом
-            'ACCOUNT': str(Grach_SMA_Cross_Strategy.account),  # Счет финам - 76008T3
+            'ACCOUNT': str(Grach_Elder_Strategy.account),  # Счет финам - 76008T3
             'ACTION': 'KILL_ALL_FUTURES_ORDERS',  # Тип заявки: Снятие всех заявок на ДЛИННУЮ позицию
-            'CLASSCODE': str(Grach_SMA_Cross_Strategy.classCode),  # Код площадки
-            'SECCODE': str(Grach_SMA_Cross_Strategy.secCode),  # Код тикера
+            'CLASSCODE': str(Grach_Elder_Strategy.classCode),  # Код площадки
+            'SECCODE': str(Grach_Elder_Strategy.secCode),  # Код тикера
             'OPERATION': 'S',  # B = покупка, S = продажа
             'BASE_CONTRACT': "VTBR", }
         print(f'Снятие всех заявок на КОРОТКУЮ позицию отправлена на рынок: {qpProvider.SendTransaction(transaction)["data"]}\n')

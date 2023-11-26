@@ -1,0 +1,165 @@
+<div class="registerProcurement__resultSearch">
+    <div class="registerProcurement__resultSearch-buttonBlock buttonBlock">
+        <div data-bind="foreach: pageVM.tradeStates()">
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Все</button>
+
+            <button class="btn active" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Прием предложений</button>
+
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Согласование</button>
+
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Заключение договора</button>
+
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Договор заключен</button>
+
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Нет предложений</button>
+
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Отменена</button>
+
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Закупка на согласовании</button>
+
+            <button class="btn" data-bind="text: name, click: $root.pageVM.selectState, css: {active: value == $root.pageVM.filterTradeState()}">Переторжка</button>
+        </div>
+            <input type="hidden" value="15" name="defaultState">
+            </div>
+
+    <div data-bind="foreach: pageVM.listTradesTest">
+        <div class="registerProcurement__resultSearch-blockResult blockResult" data-bind="css: getColorTrade()">
+            <div class="mainBLockResult">
+                <div class="blockResult__leftContent">
+                    <h4 class="blockResult__leftContent-topLotNumber">
+                        <b>№&nbsp;</b> <span data-bind="text: Id">2586005</span>
+                        <!-- ko if: SourcePlatform() == "10"-->
+                        <span>&nbsp;Государственные закупки (44-ф3)</span>
+                        <!-- /ko -->
+                        <!-- ko if: SourcePlatform() == "30"--><!-- /ko -->
+                    </h4>
+                    <a class="blockResult__leftContent-linkString" data-bind="attr: { href: '/Trade/ViewTrade/' + Id() }, text: TradeName" href="/Trade/ViewTrade/2586005">Поставка хозяйственных товаров</a>
+
+                    <p class="blockResult__leftContent-description">
+                        <span class="grayText" data-bind="text: CustomerFullName">МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ГОРОДСКОГО ОКРУГА КОРОЛЁВ МОСКОВСКОЙ ОБЛАСТИ "УПРАВЛЕНИЕ МАТЕРИАЛЬНО-ТЕХНИЧЕСКОГО ОБЕСПЕЧЕНИЯ"</span>
+                        <span class="my-tooltip tooltipstered" data-tooltip-content="#charity-tooltip" data-bind="visible: IsBenefactor,event: { mouseover: koVMs.pageVM.onFocus}" style="display: none;">
+                            <img src="/Content/Redesign/img/charity-logo.svg" alt="">
+                        </span>
+                    </p>
+
+                    <!-- ko if: SourcePlatform() == "10" || SourcePlatform() == "30"-->
+                    <p class="blockResult__leftContent-parag">
+                        <span class="grayText">Категория:</span><span data-bind="text: CategoryName">Бытовая химия и средства личной гигиены</span>
+                    </p>
+                    <!-- /ko -->
+                    <!-- ko if: SourcePlatform() != "10" && SourcePlatform() != "30"--><!-- /ko -->
+
+
+                    <p class="blockResult__leftContent-parag">
+                        <span class="grayText">Начало приема заявок:</span><span data-bind="dateString: PublicationDate, datePattern: 'DD.MM.YYYY'">31.03.2023</span>
+                    </p>
+
+                    <p class="blockResult__leftContent-parag">
+
+                        <span class="grayText">Окончание приема заявок:</span><span class="localize_datetime" data-bind="text: FillingApplicationEndDate">05.04.2023 12:34 (мск)</span>
+                    </p>
+
+                    <!-- ko if: $root.pageVM.showApprovementTrades() == true && ko.unwrap(TradeApprovements).length>0--><!-- /ko -->
+
+                </div>
+                <div class="blockResult__rightContent tradeIndexRightContent">
+                    <div class="view-trade-flags-block">
+                        <!-- ko if: IsSmp()--><!-- /ko -->
+                        <p class="view-trade-flag currentStatus active">
+                            <span data-bind="text: TradeStateName">Прием предложений</span>
+                        </p>
+                    </div>
+                    <p class="blockResult__rightContent-price" data-bind="number: InitialPrice , precision: 2, symbol: ' ₽', decimal: ',', separator: ' ', after: true">149 819,74 ₽</p>
+
+                </div>
+            </div>
+
+            <div class="blockResult__bottomLine">
+                <p class="blockResult__bottomLine-link"><img class="userImg" src="/Content/Redesign/img/man-user.svg" alt=""> <a data-bind="attr: { href: '/Customer/ViewCustomerInfoById?customerId=' + OrganizationId() }" href="/Customer/ViewCustomerInfoById?customerId=41988">Карточка заказчика</a></p>
+            </div>
+        </div>
+
+        <div class="registerProcurement__resultSearch-blockResult blockResult" data-bind="css: getColorTrade()">
+            <div class="mainBLockResult">
+                <div class="blockResult__leftContent">
+                    <h4 class="blockResult__leftContent-topLotNumber">
+                        <b>№&nbsp;</b> <span data-bind="text: Id">2589099</span>
+                        <!-- ko if: SourcePlatform() == "10"-->
+                        <span>&nbsp;Государственные закупки (44-ф3)</span>
+                        <!-- /ko -->
+                        <!-- ko if: SourcePlatform() == "30"--><!-- /ko -->
+                    </h4>
+                    <a class="blockResult__leftContent-linkString" data-bind="attr: { href: '/Trade/ViewTrade/' + Id() }, text: TradeName" href="/Trade/ViewTrade/2589099">Поставка расходных материалов для учебно-производственной мастерской Техникума технологии и дизайна</a>
+
+                    <p class="blockResult__leftContent-description">
+                        <span class="grayText" data-bind="text: CustomerFullName">ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ МОСКОВСКОЙ ОБЛАСТИ "ТЕХНОЛОГИЧЕСКИЙ УНИВЕРСИТЕТ ИМЕНИ ДВАЖДЫ ГЕРОЯ СОВЕТСКОГО СОЮЗА, ЛЕТЧИКА-КОСМОНАВТА А.А.ЛЕОНОВА"</span>
+                        <span class="my-tooltip tooltipstered" data-tooltip-content="#charity-tooltip" data-bind="visible: IsBenefactor,event: { mouseover: koVMs.pageVM.onFocus}" style="display: none;">
+                            <img src="/Content/Redesign/img/charity-logo.svg" alt="">
+                        </span>
+                    </p>
+
+                    <!-- ko if: SourcePlatform() == "10" || SourcePlatform() == "30"-->
+                    <p class="blockResult__leftContent-parag">
+                        <span class="grayText">Категория:</span><span data-bind="text: CategoryName">Прочее</span>
+                    </p>
+                    <!-- /ko -->
+                    <!-- ko if: SourcePlatform() != "10" && SourcePlatform() != "30"--><!-- /ko -->
+
+
+                    <p class="blockResult__leftContent-parag">
+                        <span class="grayText">Начало приема заявок:</span><span data-bind="dateString: PublicationDate, datePattern: 'DD.MM.YYYY'">04.04.2023</span>
+                    </p>
+
+                    <p class="blockResult__leftContent-parag">
+
+                        <span class="grayText">Окончание приема заявок:</span><span class="localize_datetime" data-bind="text: FillingApplicationEndDate">05.04.2023 12:34 (мск)</span>
+                    </p>
+
+                    <!-- ko if: $root.pageVM.showApprovementTrades() == true && ko.unwrap(TradeApprovements).length>0--><!-- /ko -->
+
+                </div>
+                <div class="blockResult__rightContent tradeIndexRightContent">
+                    <div class="view-trade-flags-block">
+                        <!-- ko if: IsSmp()--><!-- /ko -->
+                        <p class="view-trade-flag currentStatus active">
+                            <span data-bind="text: TradeStateName">Прием предложений</span>
+                        </p>
+                    </div>
+                    <p class="blockResult__rightContent-price" data-bind="number: InitialPrice , precision: 2, symbol: ' ₽', decimal: ',', separator: ' ', after: true">37 012,00 ₽</p>
+
+                </div>
+            </div>
+
+            <div class="blockResult__bottomLine">
+                <p class="blockResult__bottomLine-link"><img class="userImg" src="/Content/Redesign/img/man-user.svg" alt=""> <a data-bind="attr: { href: '/Customer/ViewCustomerInfoById?customerId=' + OrganizationId() }" href="/Customer/ViewCustomerInfoById?customerId=41020">Карточка заказчика</a></p>
+            </div>
+        </div>
+
+        <div class="registerProcurement__resultSearch-blockResult blockResult" data-bind="css: getColorTrade()">
+            <div class="mainBLockResult">
+                <div class="blockResult__leftContent">
+                    <h4 class="blockResult__leftContent-topLotNumber">
+                        <b>№&nbsp;</b> <span data-bind="text: Id">2577513</span>
+                        <!-- ko if: SourcePlatform() == "10"-->
+                        <span>&nbsp;Государственные закупки (44-ф3)</span>
+                        <!-- /ko -->
+                        <!-- ko if: SourcePlatform() == "30"--><!-- /ko -->
+                    </h4>
+                    <a class="blockResult__leftContent-linkString" data-bind="attr: { href: '/Trade/ViewTrade/' + Id() }, text: TradeName" href="/Trade/ViewTrade/2577513">Покупка тэна в чайник</a>
+
+                    <p class="blockResult__leftContent-description">
+                        <span class="grayText" data-bind="text: CustomerFullName">МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ "ЛИЦЕЙ № 15"</span>
+                        <span class="my-tooltip tooltipstered" data-tooltip-content="#charity-tooltip" data-bind="visible: IsBenefactor,event: { mouseover: koVMs.pageVM.onFocus}" style="display: none;">
+                            <img src="/Content/Redesign/img/charity-logo.svg" alt="">
+                        </span>
+                    </p>
+
+                    <!-- ko if: SourcePlatform() == "10" || SourcePlatform() == "30"-->
+                    <p class="blockResult__leftContent-parag">
+                        <span class="grayText">Категория:</span><span data-bind="text: CategoryName">Бытовая техника и хозтовары</span>
+                    </p>
+                    <!-- /ko -->
+                    <!-- ko if: SourcePlatform() != "10" && SourcePlatform() != "30"--><!-- /ko -->
+
+
+                    <p class="blockResult__leftContent-parag">
