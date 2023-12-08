@@ -49,3 +49,4 @@ if __name__ == '__main__':  # Точка входа при запуске это
     print(f'                                    - С комиссией  {analysis["pnl"]["net"]["total"]:.2f}')
     print(f'- Всего сделок  {analysis["total"]["total"]}')
     cerebro.plot(style='candlestick', barup='g', bardown='b')  # Рисуем график. Требуется matplotlib версии 3.2.2 (pip install matplotlib==3.2.2)
+# ты гандон
